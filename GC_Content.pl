@@ -1,0 +1,27 @@
+#!/usr/bin/perl -w
+print "Please enter the filename of the DNA sequence \n";
+$filename = <STDIN>;
+chomp ($filename);
+open('dna',$filename);
+@dna = <dna>;
+$dna = join('',@dna);
+$dna=~s/\s//g;
+$dna = uc($dna);
+$length = length($dna);
+# $a = 0; $t = 0; $g = 0; $c = 0;
+$a = ($dna =~tr/Aa//);
+$t = ($dna =~tr/Tt//);
+$g = ($dna =~tr/Gg//);
+$c = ($dna =~tr/Cc//);
+$basecount = ($dna =~ tr/ATGCatgc//);
+$nonbase = ($length) - $basecount;
+print "\nTotal length of the given DNA sequence = $length\n\n";
+print "\nTotal number of nucleotide bases = $basecount\n";
+print "\nNumber of other bases = $nonbase\n";
+print "\nFrequency of nucletides:\n";
+print "A=$a T=$t G=$g C=$c\n";
+$gc = (($g + $c)/ $length)*100;
+print "\nGC content of the given sequence =";
+printf("%.2f",$gc);
+print "\%\n\n";
+exit;
